@@ -8,12 +8,29 @@
 </head>
 <body>
 
-    <form action="post">
-
-        <input type="text" placeholder="Task Name">
-        <textarea name="Task-discription" id="" placeholder="Notes"></textarea>
-
-    </form>
+    <div class="form-div">
+        <form action="post" method="dialog">
+            <label for="task-name">Title</label>
+            <input type="text" placeholder="Task Name" id="task-name">
+            <label for="Notes">Notes</label>
+            <textarea name="Task-discription" id="Notes" placeholder="Notes" rows="4"></textarea>
+            <label for="date"></label>
+            <input type="date">
+            <label for="Prority">Prority</label>
+            <select name="importance" id="Prority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <label for="Project">Project</label>
+            <select name="importance" id="Prority">
+                <option value="low">Home</option>
+                <option value="medium">Work</option>
+                <option value="high">School</option>
+            </select>
+    
+        </form>
+    </div>
     
 </body>
 </html>

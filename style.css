@@ -9,7 +9,7 @@ h1,h2,h3 {
     padding: 0;
 }
 
-button, input[type="submit"], input[type="reset"] {
+button, input[type=submit], input[type=reset] {
 	background: none;
 	color: inherit;
 	border: none;
@@ -97,3 +97,49 @@ h3 {
     font-weight: bold;
     cursor: pointer;
 }
+
+
+/* Form Styling */
+
+.form-div {
+    border: 1px solid wheat;
+    width: 30%;
+    border-radius: 20px;
+    
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    
+   
+}
+
+form input,select {
+    padding: 10px;
+    
+    font-size: medium;
+    border-radius: 8px;
+    border: 1px solid wheat;
+}
+
+textarea {
+    resize: none;
+    font-size: medium;
+    outline: none;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid wheat;
+}
+
+input:focus, textarea:focus, select:focus{
+    outline: 2px solid orange;     /* oranges! yey */
+}
+
+.form-btns {
+    display: flex;
+    justify-content: right;
+}
+
