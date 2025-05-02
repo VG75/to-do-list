@@ -1,12 +1,15 @@
+import { renderTasks } from "./renderPage.js";
+
 const dialog = document.querySelector("dialog");
 const showDialogBtn = document.querySelector(".add-btn");
 const submitBtn = document.querySelector(".submit");
 const cancelBtn = document.querySelector(".cancel");
+const mainContainer = document.querySelector(".main-container");
 
 
 
 
-tasks = [
+let tasks = [
     {
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
@@ -37,9 +40,12 @@ tasks = [
     }
 ]
 
-showDialogBtn.addEventListener("click", () => {
-    dialog.showModal();
-});
+renderTasks("All Tasks", tasks);
+
+
+// showDialogBtn.addEventListener("click", () => {
+//     dialog.showModal();
+// });
 
 // submitBtn.addEventListener("click", () => {
 //     dialog.close();
