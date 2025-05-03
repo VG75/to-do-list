@@ -8,7 +8,7 @@ function addTask(value, taskContainer) {
     div.dataset.id = value.id;
     
     div.innerHTML = `<div class="task-checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" class = "checkbox">
                     </div>
                     <div class="task-content">
                         <div class="task-header">
