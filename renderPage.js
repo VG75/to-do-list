@@ -12,7 +12,7 @@ function addTask(value, taskContainer) {
                         <div class="task-header">
                             <h4 class="task-title">${value.title}</h4>
                             <div class="header-right">
-                                <span class="badge success">${value.time}</span>
+                                <span class="badge success">${value.priority}</span>
                                 <div class="task-date">${value.date}</div>
                             </div>
                         </div>

@@ -4,32 +4,36 @@ let tasks = [
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
         date   :  "29 Apr 2025",
-        time   : "low",
+        priority: "low",
         project: "default",
+        done   : false,
     },
     {
         id     :  generateId(),
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
         date   :  "29 Apr 2025",
-        time   : "low",
+        priority: "low",
         project: "default",
+        done   : false,
     },
     {
         id     :  generateId(),
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
         date   :  "29 Apr 2025",
-        time   : "low",
+        priority: "low",
         project: "default",
+        done   : false,
     },
     {
         id     :  generateId(),
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
         date   :  "29 Apr 2025",
-        time   : "low",
+        priority: "low",
         project: "default",
+        done   : false,
     }
 ];
 
@@ -38,16 +42,17 @@ function generateId() {
 }
 
 // Function to add a new task
-function addTask(title, note, date, time, project = "default") {
+function addTask(title, note, date, priority, project ,done) {
     const newTask = {
         id: generateId(),
         title,
         note,
         date,
-        time,
-        project
+        priority,
+        project,
+        done,
     };
-    
+    console.log(newTask);
     tasks.push(newTask);
     return newTask;
 }
@@ -62,5 +67,16 @@ function getAllTasks() {
     return tasks;
 }
 
+// function findIdIndex(value, index, tasks) {
+//     return value.id 
+// }
+
+function changeStatus(id) {
+    let index = tasks.findLastIndex(x => x.id == id);
+    tasks[index].done = !tasks[index].done;
+    // console.log(index);
+    // console.log(tasks[index]);
+}
+
 // Export the functions and tasks array
-export { tasks, addTask, removeTasks, getAllTasks };
+export { tasks, addTask, removeTasks, getAllTasks, changeStatus };
