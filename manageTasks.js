@@ -86,6 +86,16 @@ function changeStatus(id) {
 }
 
 
+function editTask(id, title, note, date, priority, project ,done) {
+    let index = tasks.findLastIndex(x => x.id == id);
+    tasks[index].title = title;
+    tasks[index].note = note;
+    tasks[index].date = date;
+    tasks[index].priority = priority;
+    tasks[index].project = project;
+    tasks[index].done = done;
+}
+
 
 // Export the functions and tasks array
-export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate };
+export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate, editTask };

@@ -1,4 +1,4 @@
-import { removeTasks, changeStatus, addTask, tasks } from "./manageTasks.js";
+import { removeTasks, changeStatus, addTask, editTask, tasks } from "./manageTasks.js";
 import { renderTasks } from "./renderPage.js";
 
 let isEditing = false;
@@ -85,7 +85,9 @@ const attachEventListeners = function() {
         // console.log(date);
         
         if (isEditing) {
-
+            editTask(editId, title, notes, date, priority, project,false);
+            isEditing = false;
+            editId = null;
         } else {
             addTask(title, notes, date, priority, project,false);
         }
