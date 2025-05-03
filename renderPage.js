@@ -3,6 +3,7 @@ const mainContainer = document.querySelector(".main-container");
 function addTask(value, taskContainer) {
     const div = document.createElement("div");
     div.classList.add("task-item");
+    div.dataset.id = value.id;
     
     div.innerHTML = `<div class="task-checkbox">
                         <input type="checkbox">
