@@ -1,3 +1,5 @@
+import {formatDate} from "./manageTasks.js";
+
 const mainContainer = document.querySelector(".main-container");
 
 function addTask(value, taskContainer) {
@@ -13,7 +15,8 @@ function addTask(value, taskContainer) {
                             <h4 class="task-title">${value.title}</h4>
                             <div class="header-right">
                                 <span class="badge success">${value.priority}</span>
-                                <div class="task-date">${value.date}</div>
+                                <div class="task-date">${formatDate(value.date)}</div>
+
                             </div>
                         </div>
                         <p class="task-description">${value.note}</p>

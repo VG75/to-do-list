@@ -1,5 +1,5 @@
-let tempInputDate = new Date();
-let currentDate = tempInputDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+let currentDate = new Date().toISOString().split('T')[0];  // "YYYY-MM-DD"
+
 let tasks = [
     {
         id     :  generateId(),
@@ -7,7 +7,7 @@ let tasks = [
         note   : "Continue through the textbook until page 130.",
         date   :  currentDate,
         priority: "low",
-        project: "default",
+        project: "Home",
         done   : false,
     },
     {
@@ -16,7 +16,7 @@ let tasks = [
         note   : "Continue through the textbook until page 130.",
         date   :  currentDate,
         priority: "low",
-        project: "default",
+        project: "Home",
         done   : false,
     },
     {
@@ -25,7 +25,7 @@ let tasks = [
         note   : "Continue through the textbook until page 130.",
         date   :  currentDate,
         priority: "low",
-        project: "default",
+        project: "Home",
         done   : false,
     },
     {
@@ -34,10 +34,15 @@ let tasks = [
         note   : "Continue through the textbook until page 130.",
         date   :  currentDate,
         priority: "low",
-        project: "default",
+        project: "Home",
         done   : false,
     }
 ];
+
+function formatDate(isoDate) {
+    const options = { day: '2-digit', month: 'short', year: 'numeric' };
+    return new Date(isoDate).toLocaleDateString('en-GB', options); // e.g. "03 May 2025"
+}
 
 function generateId() {
     return Date.now() + Math.floor(Math.random() * 10000);
@@ -80,5 +85,7 @@ function changeStatus(id) {
     // console.log(tasks[index]);
 }
 
+
+
 // Export the functions and tasks array
-export { tasks, addTask, removeTasks, getAllTasks, changeStatus };
+export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate };

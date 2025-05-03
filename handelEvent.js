@@ -1,7 +1,8 @@
 import { removeTasks, changeStatus, addTask, tasks } from "./manageTasks.js";
 import { renderTasks } from "./renderPage.js";
 
-
+let isEditing = false;
+let editId = null;
 
 const dialog = document.querySelector("dialog");
 const showDialogBtn = document.querySelector(".add-btn");
@@ -38,6 +39,31 @@ const attachEventListeners = function() {
         });
     });
 
+    document.querySelectorAll('.bi-pencil-square').forEach((edit) => {
+        edit.addEventListener('click', (e) => {
+          const taskDiv = e.target.closest('.task-item');
+          const id = Number(taskDiv.dataset.id);
+          const index = tasks.findLastIndex(x => x.id == id);
+          const task = tasks[index];
+          console.log(task);
+          console.log(task.date);
+          isEditing = true;
+          editId = id;
+      
+          form.querySelector('#task-name').value = task.title;
+          form.querySelector('#Notes').value = task.note;
+      
+          // Parse the date string and format it for the input field
+          form.querySelector('#date').value = task.date;
+
+      
+          form.querySelector('#Prority').value = task.priority;
+          form.querySelector('#projects').value = (task.project).toLowerCase();
+      
+          dialog.showModal();
+        });
+    });
+
     
     showDialogBtn?.addEventListener("click", () => {
         dialog.showModal();
@@ -54,11 +80,15 @@ const attachEventListeners = function() {
         let notes = formData.get('Task-discription');
         let priority = form.querySelector('#Prority').value;
         let project = form.querySelector('#projects').value;
-        const inputDate =  form.querySelector('#date').value// from input type="date"
-        let date = new Date(inputDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-        console.log(date);
+        let date=  form.querySelector('#date').value// from input type="date"
+        // let date = new Date(inputDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        // console.log(date);
         
-        addTask(title, notes, date, priority, project,false);
+        if (isEditing) {
+
+        } else {
+            addTask(title, notes, date, priority, project,false);
+        }
         form.reset();
         dialog.close();
         
@@ -78,10 +108,10 @@ const attachEventListeners = function() {
     });
 
     cancelBtn?.addEventListener("click", () => {
+        form.reset();
         dialog.close();
-    });
 
-    
+    });
 }
 
 export { attachEventListeners }
