@@ -1,9 +1,7 @@
 import { removeTasks, changeStatus, addTask, tasks } from "./manageTasks.js";
 import { renderTasks } from "./renderPage.js";
 
-const dateInput = document.getElementById('date');
-const today = new Date().toISOString().split('T')[0];
-dateInput.min = today;
+
 
 const dialog = document.querySelector("dialog");
 const showDialogBtn = document.querySelector(".add-btn");
@@ -61,7 +59,7 @@ const attachEventListeners = function() {
         console.log(date);
         
         addTask(title, notes, date, priority, project,false);
-        
+        form.reset();
         dialog.close();
         
         renderTasks("All Tasks", tasks);
@@ -82,6 +80,8 @@ const attachEventListeners = function() {
     cancelBtn?.addEventListener("click", () => {
         dialog.close();
     });
+
+    
 }
 
 export { attachEventListeners }

@@ -1,9 +1,11 @@
+let tempInputDate = new Date();
+let currentDate = tempInputDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
 let tasks = [
     {
         id     :  generateId(),
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
-        date   :  "29 Apr 2025",
+        date   :  currentDate,
         priority: "low",
         project: "default",
         done   : false,
@@ -12,7 +14,7 @@ let tasks = [
         id     :  generateId(),
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
-        date   :  "29 Apr 2025",
+        date   :  currentDate,
         priority: "low",
         project: "default",
         done   : false,
@@ -21,7 +23,7 @@ let tasks = [
         id     :  generateId(),
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
-        date   :  "29 Apr 2025",
+        date   :  currentDate,
         priority: "low",
         project: "default",
         done   : false,
@@ -30,7 +32,7 @@ let tasks = [
         id     :  generateId(),
         title  : "Study Differential Equations",
         note   : "Continue through the textbook until page 130.",
-        date   :  "29 Apr 2025",
+        date   :  currentDate,
         priority: "low",
         project: "default",
         done   : false,
