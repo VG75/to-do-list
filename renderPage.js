@@ -7,16 +7,24 @@ function addTask(value, taskContainer) {
     div.classList.add("task-item");
     div.dataset.id = value.id;
     
+    // Determine the badge class based on priority
+    let badgeClass = "success"; // Default (for low)
+    
+    if (value.priority.toLowerCase() === "medium") {
+        badgeClass = "warning";
+    } else if (value.priority.toLowerCase() === "high") {
+        badgeClass = "danger";
+    }
+    
     div.innerHTML = `<div class="task-checkbox">
-                        <input type="checkbox" class = "checkbox">
+                        <input type="checkbox" class="checkbox">
                     </div>
                     <div class="task-content">
                         <div class="task-header">
                             <h4 class="task-title">${value.title}</h4>
                             <div class="header-right">
-                                <span class="badge success">${value.priority}</span>
+                                <span class="badge ${badgeClass}">${value.priority}</span>
                                 <div class="task-date">${formatDate(value.date)}</div>
-
                             </div>
                         </div>
                         <p class="task-description">${value.note}</p>

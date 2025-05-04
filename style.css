@@ -285,6 +285,10 @@
     background-color: #ffebee;
     color: #d32f2f;
 }
+.badge.warning {
+  background-color: #fff8e1;
+  color: #f57c00;
+}
 
 .header-right {
     display: flex;
