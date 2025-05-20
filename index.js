@@ -1,5 +1,6 @@
 import { removeTasks, changeStatus, addTask, editTask, tasks } from "./manageTasks.js";
 import { handleMainContainerEvents } from "./handelMainContainerEvent.js";
+import { handelSideContainerEvent } from "./handleSideContainerEvent.js"
 import { renderTasks } from "./renderPage.js";
 
 // let isEditing = false;
@@ -109,4 +110,5 @@ import { renderTasks } from "./renderPage.js";
 //
 renderTasks("All Tasks", tasks);
 
+handelSideContainerEvent();
 handleMainContainerEvents();

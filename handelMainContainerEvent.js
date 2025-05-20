@@ -16,38 +16,38 @@ const handleMainContainerEvents = function() {
     dateInput.min = today;
 
     // Open the dialog when "Add Task" button is clicked
-    showDialogBtn?.addEventListener("click", () => dialog.showModal());
+    // showDialogBtn?.addEventListener("click", () => dialog.showModal());
 
-    // Close and reset form on cancel
-    cancelBtn?.addEventListener("click", () => {
-    form.reset();
-    dialog.close();
-    });
+    // // Close and reset form on cancel
+    // cancelBtn?.addEventListener("click", () => {
+    //     form.reset();
+    //     dialog.close();
+    // });
 
-    // Handle form submission (add or edit)
-    form.addEventListener("submit", e => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const title    = formData.get('title');
-        const notes    = formData.get('Task-discription');
-        const date     = form.querySelector('#date').value;    // format: YYYY-MM-DD
-        const priority = formData.get('Prority');  
-        const project  = formData.get('projects'); 
+    // // Handle form submission (add or edit)
+    // form.addEventListener("submit", e => {
+    //     e.preventDefault();
+    //     const formData = new FormData(form);
+    //     const title    = formData.get('title');
+    //     const notes    = formData.get('Task-discription');
+    //     const date     = form.querySelector('#date').value;    // format: YYYY-MM-DD
+    //     const priority = formData.get('Prority');  
+    //     const project  = formData.get('projects'); 
 
-        console.log({ title, notes, date, priority, project });
+    //     console.log({ title, notes, date, priority, project });
 
-        if (isEditing) {
-            editTask(editId, title, notes, date, priority, project, false);
-            isEditing = false;
-            editId     = null;
-        } else {
-            addTask(title, notes, date, priority, project, false);
-        }
+    //     if (isEditing) {
+    //         editTask(editId, title, notes, date, priority, project, false);
+    //         isEditing = false;
+    //         editId     = null;
+    //     } else {
+    //         addTask(title, notes, date, priority, project, false);
+    //     }
 
-        form.reset();
-        dialog.close();
-        renderTasks("All Tasks", tasks);
-    });
+    //     form.reset();
+    //     dialog.close();
+    //     renderTasks("All Tasks", tasks);
+    // });
 
     // Event delegation on main container for checkbox, edit, and delete
     mainContainer.addEventListener('click', e => {
@@ -64,7 +64,7 @@ const handleMainContainerEvents = function() {
         }
 
     // Edit
-    if (el.matches('.bi-pencil-square')) {
+        if (el.matches('.bi-pencil-square')) {
             const task = tasks.find(t => t.id === id);
             if (!task) return;
 
