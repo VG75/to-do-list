@@ -1,6 +1,6 @@
-import {formatDate} from "./manageTasks.js";
+import {formatDate} from "./manageTasks.js";  
 
-const mainContainer = document.querySelector(".main-container");
+const mainContainer = document.querySelector(".main-container");  
 
 function addTask(value, taskContainer) {
     const div = document.createElement("div");
@@ -16,18 +16,26 @@ function addTask(value, taskContainer) {
         badgeClass = "danger";
     }
     
+    // Check if the task is completed
+    const isCompleted = value.done === true;
+    
+    // Add completed class to the div if the task is completed
+    if (isCompleted) {
+        div.classList.add("completed-task");
+    }
+    
     div.innerHTML = `<div class="task-checkbox">
-                        <input type="checkbox" class="checkbox">
+                        <input type="checkbox" class="checkbox" ${isCompleted ? 'checked' : ''}>
                     </div>
                     <div class="task-content">
                         <div class="task-header">
-                            <h4 class="task-title">${value.title}</h4>
+                            <h4 class="task-title ${isCompleted ? 'completed' : ''}">${value.title}</h4>
                             <div class="header-right">
                                 <span class="badge ${badgeClass}">${value.priority}</span>
                                 <div class="task-date">${formatDate(value.date)}</div>
                             </div>
                         </div>
-                        <p class="task-description">${value.note}</p>
+                        <p class="task-description ${isCompleted ? 'completed' : ''}">${value.note}</p>
                         <div class="task-footer">
                             <span class="task-project">#${value.project}</span>
                             <div class="action-buttons">
@@ -44,7 +52,24 @@ function addTask(value, taskContainer) {
                     </div>`;
     
     taskContainer.appendChild(div);
-}
+    
+    // Add event listener for checkbox changes to toggle completed status
+    const checkbox = div.querySelector('.checkbox');
+    checkbox.addEventListener('change', function() {
+        const taskTitle = div.querySelector('.task-title');
+        const taskDescription = div.querySelector('.task-description');
+        
+        if (this.checked) {
+            div.classList.add('completed-task');
+            taskTitle.classList.add('completed');
+            taskDescription.classList.add('completed');
+        } else {
+            div.classList.remove('completed-task');
+            taskTitle.classList.remove('completed');
+            taskDescription.classList.remove('completed');
+        }
+    });
+}  
 
 function renderTasks(pageTitle, taskLists) {
     // Add error handling for when mainContainer might not be found
@@ -52,22 +77,22 @@ function renderTasks(pageTitle, taskLists) {
         console.error("Main container element not found!");
         return;
     }
-
+    
     mainContainer.innerHTML = "";
-
+    
     // Creating Elements
     const h2 = document.createElement("h2");
     const div = document.createElement("div");
-
+    
     // Adding the title
     h2.textContent = pageTitle;
     mainContainer.appendChild(h2);
-
+    
     div.classList.add("task-container");
     mainContainer.appendChild(div);
-
+    
     // Pass the task container to addTask
     taskLists.forEach(task => addTask(task, div));
-}
+}  
 
 export { renderTasks };
