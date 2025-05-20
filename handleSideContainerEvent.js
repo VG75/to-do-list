@@ -1,4 +1,4 @@
-import { removeTasks, changeStatus, addTask, editTask, tasks } from "./manageTasks.js";
+import { removeTasks, changeStatus, addTask, editTask, tasks, getAllTasks, completedTasks } from "./manageTasks.js";
 import { renderTasks } from "./renderPage.js";
 
 const handelSideContainerEvent = function() {
@@ -9,7 +9,6 @@ const handelSideContainerEvent = function() {
     const dialog = document.querySelector("dialog");
     const showDialogBtn = document.querySelector(".add-btn");
     const cancelBtn = document.querySelector(".cancel");
-    const mainContainer = document.querySelector(".main-container");
     const form = document.querySelector("form");
 
     const dateInput = document.getElementById('date');
@@ -49,6 +48,30 @@ const handelSideContainerEvent = function() {
         dialog.close();
         renderTasks("All Tasks", tasks);
     });
+
+    sideContainer.addEventListener("click", (e) => {
+        const el = e.target;
+        const targetDiv = el.closest('.home');
+        console.log(el);
+        if (!targetDiv) return;
+        
+        let newTask = [];
+
+        if (el.matches('.all-list')) {
+            newTask = getAllTasks();
+            renderTasks("All Tasks", newTask);
+            console.log("Hi");
+
+        } 
+        console.log("Hello");
+        if(el.matches('.completed-list') || el.matches('#completed')) {
+            console.log("Hi!!!!");
+
+            newTask = completedTasks();
+            renderTasks("Completed Tasks", newTask);
+            
+        }
+    })
 }
 
 export {handelSideContainerEvent};

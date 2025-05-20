@@ -74,6 +74,10 @@ function getAllTasks() {
     return tasks;
 }
 
+function completedTasks() {
+    return tasks.filter(task => task.done);
+}
+
 // function findIdIndex(value, index, tasks) {
 //     return value.id 
 // }
@@ -98,4 +102,4 @@ function editTask(id, title, note, date, priority, project ,done) {
 
 
 // Export the functions and tasks array
-export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate, editTask };
+export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate, editTask, completedTasks };
