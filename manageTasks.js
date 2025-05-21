@@ -7,7 +7,7 @@ let tasks = [
         note   : "Continue through the textbook until page 130.",
         date   :  currentDate,
         priority: "low",
-        project: "Home",
+        project: "home",
         done   : false,
     },
     {
@@ -16,7 +16,7 @@ let tasks = [
         note   : "Continue through the textbook until page 130.",
         date   :  currentDate,
         priority: "low",
-        project: "Home",
+        project: "home",
         done   : false,
     },
     {
@@ -25,7 +25,7 @@ let tasks = [
         note   : "Continue through the textbook until page 130.",
         date   :  currentDate,
         priority: "low",
-        project: "Home",
+        project: "home",
         done   : false,
     },
     {
@@ -34,7 +34,7 @@ let tasks = [
         note   : "Continue through the textbook until page 130.",
         date   :  currentDate,
         priority: "low",
-        project: "Home",
+        project: "home",
         done   : false,
     }
 ];
@@ -106,8 +106,25 @@ function editTask(id, title, note, date, priority, project ,done) {
 
 
 function addProject(projectName) {
-    projects.push(projectName);
-    return project;
+    const projects = getAllProjects();
+    
+    // Check if project already exists (case insensitive)
+    const projectExists = projects.some(project => 
+        project.toLowerCase() === projectName.toLowerCase()
+    );
+    
+    if (!projectExists) {
+        // Add project to array
+        projects.push(projectName.toLowerCase());
+        
+        // Save to localStorage
+        localStorage.setItem('projects', JSON.stringify(projects));
+        
+        // Return success
+        return true;
+    }
+
+    return false;
 }
 
 function getAllProjects() {

@@ -107,6 +107,70 @@
     font-weight: bold;
     cursor: pointer;
   }
+  /* Add these styles to your CSS file */
+
+/* Project Dialog Styling */
+.project-dialog form {
+    min-width: 300px;
+}
+
+.project-dialog h3 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Project sidebar styling */
+.project-container {
+    margin-top: 20px;
+}
+
+.project-container h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.project-container .home div {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.project-container .home div:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.project-container button {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-align: left;
+    padding: 5px;
+}
+
+#add-project {
+    margin-top: 10px;
+    color: #666;
+}
+
+#add-project:hover {
+    color: #333;
+}
+
+/* Completed task styling */
+.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.completed-task {
+    opacity: 0.8;
+}
   
   /* Form Styling */
   .form-div {

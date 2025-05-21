@@ -1,36 +1,48 @@
-import { removeTasks, changeStatus, addTask, editTask, tasks, getAllTasks, completedTasks } from "./manageTasks.js";
-import { renderTasks } from "./renderPage.js";
+import { removeTasks, changeStatus, addTask, editTask, tasks, getAllTasks, completedTasks, addProject, getAllProjects } from "./manageTasks.js";
+import { renderProjects, renderTasks } from "./renderPage.js";
 
 const handelSideContainerEvent = function() {
     const sideContainer = document.querySelector("#side-bar-container");
     let isEditing = false;
     let editId = null;
-
-    const dialog = document.querySelector("dialog");
-    const showDialogBtn = document.querySelector(".add-btn");
-    const cancelBtn = document.querySelector(".cancel");
-    const form = document.querySelector("form");
-
+    
+    // Task dialog elements
+    const taskDialog = document.querySelector("dialog.form-div:not(.project-dialog)");
+    const showTaskDialogBtn = document.querySelector(".add-btn");
+    const cancelTaskBtn = document.querySelector(".cancel");
+    const taskForm = taskDialog.querySelector("form");
+    
+    // Project dialog elements
+    const projectDialog = document.querySelector("dialog.project-dialog");
+    const cancelProjectBtn = projectDialog.querySelector(".cancel-project");
+    const projectForm = projectDialog.querySelector("form");
+    
     const dateInput = document.getElementById('date');
     const today = new Date().toISOString().split('T')[0];
     dateInput.min = today;
-
-    // Open the dialog when "Add Task" button is clicked
-    showDialogBtn?.addEventListener("click", () => dialog.showModal());
-
-    // Close and reset form on cancel
-    cancelBtn?.addEventListener("click", () => {
-        form.reset();
-        dialog.close();
+    
+    // Open the task dialog when "Add Task" button is clicked
+    showTaskDialogBtn?.addEventListener("click", () => taskDialog.showModal());
+    
+    // Close and reset task form on cancel
+    cancelTaskBtn?.addEventListener("click", () => {
+        taskForm.reset();
+        taskDialog.close();
+    });
+    
+    // Close and reset project form on cancel
+    cancelProjectBtn?.addEventListener("click", () => {
+        projectForm.reset();
+        projectDialog.close();
     });
 
     // Handle form submission (add or edit)
-    form.addEventListener("submit", e => {
+    taskForm.addEventListener("submit", e => {
         e.preventDefault();
-        const formData = new FormData(form);
+        const formData = new FormData(taskForm);
         const title    = formData.get('title');
         const notes    = formData.get('Task-discription');
-        const date     = form.querySelector('#date').value;    // format: YYYY-MM-DD
+        const date     = taskForm.querySelector('#date').value;    // format: YYYY-MM-DD
         const priority = formData.get('Prority');  
         const project  = formData.get('projects'); 
 
@@ -44,10 +56,53 @@ const handelSideContainerEvent = function() {
             addTask(title, notes, date, priority, project, false);
         }
 
-        form.reset();
-        dialog.close();
+        taskForm.reset();
+        taskDialog.close();
         renderTasks("All Tasks", tasks);
     });
+
+     projectForm.addEventListener("submit", e => {
+        e.preventDefault();
+        const projectName = projectForm.querySelector('#project-name').value;
+        
+        if (projectName.trim() !== '') {
+            const success = addProject(projectName);
+            
+            if (success) {
+                console.log(`Project "${projectName}" added successfully`);
+                // Update the project dropdown in the task form
+                updateProjectsDropdown();
+                // Re-render the projects sidebar
+                renderProjects();
+            } else {
+                console.log(`Project "${projectName}" already exists`);
+                alert(`Project "${projectName}" already exists`);
+            }
+        }
+        
+        projectForm.reset();
+        projectDialog.close();
+        
+    });
+
+    function updateProjectsDropdown() {
+        const projectsDropdown = document.getElementById('projects');
+        const projects = getAllProjects();
+        
+        // Clear current options
+        projectsDropdown.innerHTML = '';
+        
+        // Add all projects to dropdown
+        projects.forEach(project => {
+            const option = document.createElement('option');
+            option.value = project;
+            option.textContent = project.charAt(0).toUpperCase() + project.slice(1);
+            projectsDropdown.appendChild(option);
+        });
+    }
+
+
+
 
     sideContainer.addEventListener("click", (e) => {
         const el = e.target;
@@ -73,10 +128,10 @@ const handelSideContainerEvent = function() {
         }
 
         if  (el.matches('#add-project') || el.matches('#add-btn')) {
-
+            projectDialog.showModal();
         }
 
     });
 }
 
-export {handelSideContainerEvent};
+export { handelSideContainerEvent };
