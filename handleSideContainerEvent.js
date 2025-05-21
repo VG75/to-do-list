@@ -1,4 +1,4 @@
-import { removeTasks, changeStatus, addTask, editTask, tasks, getAllTasks, completedTasks, addProject, getAllProjects } from "./manageTasks.js";
+import { removeTasks, changeStatus, addTask, editTask, tasks, getAllTasks, completedTasks, addProject, getAllProjects, filterTasks } from "./manageTasks.js";
 import { renderProjects, renderTasks } from "./renderPage.js";
 
 const handelSideContainerEvent = function() {
@@ -130,6 +130,14 @@ const handelSideContainerEvent = function() {
         if  (el.matches('#add-project') || el.matches('#add-btn')) {
             projectDialog.showModal();
         }
+
+        if (e.target.hasAttribute('data-project')) {
+
+            const projectName = e.target.getAttribute('data-project');
+            const filteredTasks = filterTasks(projectName);
+            renderTasks(`${e.target.textContent} Tasks`, filteredTasks);
+            return;
+    }
 
     });
 }

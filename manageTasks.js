@@ -80,6 +80,10 @@ function completedTasks() {
     return tasks.filter(task => task.done);
 }
 
+function filterTasks(projectName) {
+    return tasks.filter(task => task.project === projectName);
+} 
+
 
 
 // function findIdIndex(value, index, tasks) {
@@ -132,4 +136,4 @@ function getAllProjects() {
 }
 
 // Export the functions and tasks array
-export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate, editTask, completedTasks, getAllProjects, addProject };
+export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate, editTask, completedTasks, getAllProjects, addProject, filterTasks };
