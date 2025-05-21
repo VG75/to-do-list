@@ -121,8 +121,7 @@ function addProject(projectName) {
         // Add project to array
         projects.push(projectName.toLowerCase());
         
-        // Save to localStorage
-        localStorage.setItem('projects', JSON.stringify(projects));
+        
         
         // Return success
         return true;
