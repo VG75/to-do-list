@@ -39,6 +39,8 @@ let tasks = [
     }
 ];
 
+let projects = ['home', 'work', 'school'];
+
 function formatDate(isoDate) {
     const options = { day: '2-digit', month: 'short', year: 'numeric' };
     return new Date(isoDate).toLocaleDateString('en-GB', options); // e.g. "03 May 2025"
@@ -78,6 +80,8 @@ function completedTasks() {
     return tasks.filter(task => task.done);
 }
 
+
+
 // function findIdIndex(value, index, tasks) {
 //     return value.id 
 // }
@@ -101,5 +105,14 @@ function editTask(id, title, note, date, priority, project ,done) {
 }
 
 
+function addProject(projectName) {
+    projects.push(projectName);
+    return project;
+}
+
+function getAllProjects() {
+    return projects;
+}
+
 // Export the functions and tasks array
-export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate, editTask, completedTasks };
+export { tasks, addTask, removeTasks, getAllTasks, changeStatus, formatDate, editTask, completedTasks, getAllProjects, addProject };

@@ -1,7 +1,8 @@
-import {formatDate} from "./manageTasks.js";  
+import { formatDate, getAllProjects} from "./manageTasks.js";  
+
 
 const mainContainer = document.querySelector(".main-container");  
-
+const projectContainer = document.querySelector(".project-container");
 function addTask(value, taskContainer) {
     const div = document.createElement("div");
     div.classList.add("task-item");
@@ -71,6 +72,17 @@ function addTask(value, taskContainer) {
     });
 }  
 
+function addProject(projectName, projectContainer) {
+    const div = document.createElement("div");
+    div.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-check" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0m0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0"/>
+                            </svg>
+                            <button>${ projectName.charAt(0).toUpperCase() + projectName.slice(1) }</button>`
+    
+    projectContainer.appendChild(div);
+
+}
+
 function renderTasks(pageTitle, taskLists) {
     // Add error handling for when mainContainer might not be found
     if (!mainContainer) {
@@ -83,6 +95,8 @@ function renderTasks(pageTitle, taskLists) {
     // Creating Elements
     const h2 = document.createElement("h2");
     const div = document.createElement("div");
+
+
     
     // Adding the title
     h2.textContent = pageTitle;
@@ -93,6 +107,37 @@ function renderTasks(pageTitle, taskLists) {
     
     // Pass the task container to addTask
     taskLists.forEach(task => addTask(task, div));
-}  
 
-export { renderTasks };
+
+}
+
+function renderProjects() {
+    const projects = getAllProjects();
+    projectContainer.innerHTML = "";
+    
+    // Creating Elements
+    const h3 = document.createElement("h2");
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+
+
+    h3.textContent = "My Projects";
+    projectContainer.appendChild(h3);
+
+    div1.classList.add("home");
+    projectContainer.appendChild(div1);
+
+    projects.forEach(project => addProject(project, div1));
+
+    div2.classList.add("home");
+    div2.innerHTML = `<div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                            </svg>
+                            <button id="add-btn">Add Project</button>
+                        </div>`
+    projectContainer.appendChild(div2);
+
+}
+
+export { renderTasks, renderProjects };

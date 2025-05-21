@@ -57,21 +57,26 @@ const handelSideContainerEvent = function() {
         
         let newTask = [];
 
-        if (el.matches('.all-list')) {
+        if (el.matches('.all-list') || el.matches('#all')) {
             newTask = getAllTasks();
             renderTasks("All Tasks", newTask);
             console.log("Hi");
 
         } 
         console.log("Hello");
-        if(el.matches('.completed-list') || el.matches('#completed')) {
+        if (el.matches('.completed-list') || el.matches('#completed')) {
             console.log("Hi!!!!");
 
             newTask = completedTasks();
             renderTasks("Completed Tasks", newTask);
             
         }
-    })
+
+        if  (el.matches('#add-project') || el.matches('#add-btn')) {
+
+        }
+
+    });
 }
 
 export {handelSideContainerEvent};
